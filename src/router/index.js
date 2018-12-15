@@ -10,6 +10,7 @@ import WinnerList from '@/components/WinnerList'
 import CandInfo from '@/components/CandInfo'
 import WinnerInfo from '@/components/WinnerInfo'
 import PostViewer from '@/components/PostViewer'
+import PostUploader from '@/components/PostUploader'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ export default new Router({
       path: '/postviewer',
       name: 'PostViewer',
       component: PostViewer
+    },
+    {
+      path: '/postuploader',
+      name: 'PostUploader',
+      component: PostUploader
     }
   ]
 })

@@ -102,6 +102,13 @@ export default {
             })
         },
         createLog: function(){
+          this.$router.push({
+            name:'PostUploader',
+            query: {
+              mode: 'create',
+              boardId: this.boardId
+            }
+          })
         }
     }
 }
