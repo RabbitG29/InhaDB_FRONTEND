@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>HOME</h1>
-    <router-link to="board"> 게시판 </router-link>
+    <router-link :to="{name: 'Board',query: { boardId: 1 }}"> 공지사항 </router-link>
     <br>
     <router-link to="vote"> 투표하기 </router-link>
     <br>

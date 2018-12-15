@@ -9,6 +9,7 @@ import VoteInfo from '@/components/VoteInfo'
 import WinnerList from '@/components/WinnerList'
 import CandInfo from '@/components/CandInfo'
 import WinnerInfo from '@/components/WinnerInfo'
+import PostViewer from '@/components/PostViewer'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path: '/winnerInfo',
       name: 'WinnerInfo',
       component: WinnerInfo
+    },
+    {
+      path: '/postviewer',
+      name: 'PostViewer',
+      component: PostViewer
     }
   ]
 })
