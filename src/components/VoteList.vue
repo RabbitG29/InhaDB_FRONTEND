@@ -1,19 +1,81 @@
 <template>
   <div class="container">
     <h1>VoteList</h1>
-    <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
-    <br>
-    <router-link :to="{ name: 'VoteInfo', params: {} }">목록1</router-link>
-    <router-link :to="{ name: 'Vote', params: {} }">투표하기</router-link>
-    <br>
-    <router-link :to="{ name: 'VoteInfo', params: {} }">목록2</router-link>
-    <br>
+    <div id="board">
+      <div class="board-box">
+      <div class="row form-group">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-2" >
+        </div>
+      </div>
+      <div class="row">
+          <!-- print meeting log list -->
+          <table class="table table-striped">
+            <thead>
+               <tr class="text-center">
+                <th class="text-center" scope="col">선거회차</th>
+                <th class="text-center">투표수</th>
+                <th class="text-center">투표율</th>
+                <th class="text-center">투표진행여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, index) in list" :key="index" style="cursor: pointer">
+                <td scope="col">
+                  <router-link :to="{ name: 'VoteInfo', params: { voteid: item.선거회차 } }">{{item.선거회차}}회 선거</router-link>
+                </td>
+                <td>{{item.투표수}}</td>
+                <td>{{item.투표율}}</td>
+                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율>=40">마감(당선)</td>
+                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율<40">마감(무효)</td>
+                <td v-if="now.isAfter(item.투표개시일시)&&now.isBefore(item.투표마감일시)">
+                  <router-link :to="{ name: 'Vote', params: {} }">투표하기</router-link>
+                </td>
+                <td v-if="now.isAfter(item.후보등록마감일시)&&now.isBefore(item.투표개시일시)">후보등록마감</td>
+                <td v-if="now.isAfter(item.후보등록시작일시)&&now.isBefore(item.후보등록마감일시)">
+                  <router-link :to="{ name: 'Vote', params: {} }">후보등록하기</router-link>
+                </td>
+                <td v-if="now.isBefore(item.후보등록시작일시)">후보등록 시작 예정</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'VoteList'
+  name: 'VoteList',
+  data() {
+    return {
+      msg: '투표목록',
+      list: [],
+      now: this.$moment().tz('Asia/Seoul'),
+      voteid: ''
+    }
+  },
+  mounted: function() {
+    console.log("mounted")
+    this.getData()
+
+
+  },
+  methods: {
+    getData: function() {
+      var url = this.$config.targetURL+'/vote';
+      this.$http.get(url)
+      .then(result=>{
+        console.log(result)
+        this.list = JSON.parse(result.data.result)
+        console.log(this.list)
+      })
+      .catch(err=>{
+        console.log("error")
+      })
+    }
+  }
 }
 </script>
 
@@ -25,5 +87,53 @@ export default {
 }
 h3 {
   margin: 20px;
+}
+.board-box{
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+.card{
+  text-align:left;
+  width: 18rem;
+  border: 1px solid grey;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom:10px;
+}
+#board {
+  width: 100%;
+}
+@media (min-width: 999px){
+    #board {
+        display: inline-block;
+    }
+    #mobile-board{
+        display: none;
+    }
+}
+
+@media (max-width: 1000px){
+    #board {
+        display: none;
+    }
+    #mobile-board{
+        display: inline-block;
+    }
+}
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@font-face {
+  font-family: 'NanumGothic' ;
+  src:url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
+  src:url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+      url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2) format('woff2'),
+      url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff'),
+      url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf) format('truetype');
+  font-weight : normal;
+  font-style : normal;
+}
+div, thead, tbody {
+ font-family: 'NanumGothic';
 }
 </style>
