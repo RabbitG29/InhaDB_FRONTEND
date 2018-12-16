@@ -21,6 +21,7 @@ import 'vue-datetime/dist/vue-datetime.css'
 import boardHeader from './components/board-header'
 import VueProgressBar from 'vue-progressbar'
 import wysiwyg from 'vue-wysiwyg'
+import appMenuNavigation from './components/app-menu-navigation'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
@@ -33,6 +34,7 @@ Vue.use(Datetime)
 Vue.mixin(common)
 Vue.component('board-header', boardHeader)
 Vue.use(wysiwyg, {})
+Vue.component('app-menu-navigation', appMenuNavigation)
 
 const options = {
   color: '#bffaf3',
