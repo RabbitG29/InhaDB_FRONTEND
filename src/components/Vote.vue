@@ -2,6 +2,7 @@
   <div class="container">
     <h1>Vote</h1>
     <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
+    <h2>투표...</h2>
   </div>
 </template>
 

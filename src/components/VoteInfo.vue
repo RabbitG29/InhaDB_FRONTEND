@@ -2,6 +2,12 @@
   <div class="container">
     <h1>VoteInfo</h1>
     <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
+    <br>
+    <h2>선거 정보가 나열됨...</h2>
+    <br>
+    <router-link :to="{ name: 'CandInfo', params: {} }">후보1</router-link>
+    <br>
+    <router-link :to="{ name: 'CandInfo', params: {} }">후보2</router-link>
   </div>
 </template>
 

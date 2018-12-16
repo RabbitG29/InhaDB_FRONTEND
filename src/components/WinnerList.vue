@@ -2,6 +2,10 @@
   <div class="container">
     <h1>Winner</h1>
     <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
+    <br>
+    <router-link :to="{ name: 'WinnerInfo', params: {} }">1회 당선자</router-link>
+    <br>
+    <router-link :to="{ name: 'WinnerInfo', params: {} }">2회 당선자</router-link>
   </div>
 </template>
 

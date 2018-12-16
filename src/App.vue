@@ -90,7 +90,6 @@ div {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
 <style scoped>
@@ -115,7 +114,6 @@ div {
 #login-menu {
     float: right;
     margin-right: 10px;
-    margin-top: 5px;
     margin-bottom: 5px;
     font-size: 15px;
     display: relative;
@@ -136,7 +134,6 @@ a {
 #main-menu a {
     box-sizing: border-box;
     width: 110px;
-    padding: 5px;
     color: black;
     background: white;
 }

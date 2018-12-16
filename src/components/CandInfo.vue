@@ -2,6 +2,9 @@
   <div class="container">
     <h1>Candidate</h1>
     <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
+    <h2>후보 이름들 및 정보...</h2>
+    <br>
+    <h2>후보 공약들...</h2>
   </div>
 </template>
 
