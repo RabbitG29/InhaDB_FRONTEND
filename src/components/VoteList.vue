@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>VoteList</h1>
+    <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <div id="board">
       <div class="board-box">
       <div class="row form-group">
@@ -20,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in list" :key="index" style="cursor: pointer">
+              <tr v-for="(item, index) in list" :key="index">
                 <td scope="col">
                   <router-link :to="{ name: 'VoteInfo', params: { voteid: item.선거회차 } }">{{item.선거회차}}회 선거</router-link>
                 </td>
@@ -29,11 +30,11 @@
                 <td v-if="now.isAfter(item.투표마감일시)&&item.투표율>=40">마감(당선)</td>
                 <td v-if="now.isAfter(item.투표마감일시)&&item.투표율<40">마감(무효)</td>
                 <td v-if="now.isAfter(item.투표개시일시)&&now.isBefore(item.투표마감일시)">
-                  <router-link :to="{ name: 'Vote', params: {} }">투표하기</router-link>
+                  <router-link :to="{ name: 'Vote', params: {voteid: item.선거회차} }">투표하기</router-link>
                 </td>
                 <td v-if="now.isAfter(item.후보등록마감일시)&&now.isBefore(item.투표개시일시)">후보등록마감</td>
                 <td v-if="now.isAfter(item.후보등록시작일시)&&now.isBefore(item.후보등록마감일시)">
-                  <router-link :to="{ name: 'Vote', params: {} }">후보등록하기</router-link>
+                  <router-link :to="{ name: 'RegitserCand', params: {voteid: item.선거회차} }">후보등록하기</router-link>
                 </td>
                 <td v-if="now.isBefore(item.후보등록시작일시)">후보등록 시작 예정</td>
               </tr>
@@ -74,6 +75,9 @@ export default {
       .catch(err=>{
         console.log("error")
       })
+    },
+    goBack: function(){
+      this.$router.go(-1)
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <h1>VoteInfo</h1>
+    <h1>{{this.voteid}}회 선거 정보</h1>
+    <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <div id="board">
       <div class="board-box">
       <div class="row form-group">
@@ -9,7 +10,7 @@
         </div>
       </div>
       <div class="row">
-          <!-- print meeting log list -->
+          <!-- print list -->
           <table class="table table-striped">
             <thead>
                <tr class="text-center">
@@ -21,7 +22,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in list" :key="index" style="cursor: pointer">
+              <tr v-for="(item, index) in list" :key="index">
                 <td scope="col">{{item.선거회차}}회 선거</td>
                 <td>{{item.후보등록시작일시.format('YYYY년M월D일 H:M')}}~{{item.후보등록마감일시.format('YYYY년M월D일 H:M')}}</td>
                 <td>{{item.투표개시일시.format('YYYY년M월D일 H:M')}}~{{item.투표마감일시.format('YYYY년M월D일 H:M')}}</td>
@@ -36,13 +37,15 @@
                   후보등록중
                 </td>
                 <td v-if="now.isBefore(item.후보등록시작일시)">후보등록 시작 예정</td>
+
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <h2>Candidate List</h2>
+    <br>
+    <h2>{{this.voteid}}회 선거 후보자 명단</h2>
     <br>
     <div id="board">
       <div class="board-box">
@@ -52,7 +55,7 @@
         </div>
       </div>
       <div class="row">
-          <!-- print meeting log list -->
+          <!-- print list -->
           <table class="table table-striped">
             <thead>
                <tr class="text-center">
@@ -63,7 +66,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in list2" :key="index" style="cursor: pointer">
+              <tr v-for="(item, index) in list2" :key="index">
                 <td scope="col">{{item.선거회차}}회 선거</td>
                 <td>
                   <router-link :to="{ name: 'CandInfo', params: {vote_num: voteid, candi_num: item.기호 } }">{{item.기호}}번 후보</router-link>
@@ -132,6 +135,9 @@ export default { //vote_num이랑 candi_num 넘겨줘야 함
       .catch(err=>{
         console.log("error")
       })
+    },
+    goBack: function(){
+      this.$router.go(-1)
     }
   }
 }

@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class=" col-sm-4 col-xs-4 container">
                             <div id="navigation">
-                                  <router-link to="/">정보통신공학과 선거</router-link>
+                                  <h2><router-link to="/">정보통신공학과 선거</router-link></h2>
                             </div>
                         </div>
                         <div id="nav-menu" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
