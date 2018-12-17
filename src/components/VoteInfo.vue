@@ -26,9 +26,9 @@
                 <td scope="col">{{item.선거회차}}회 선거</td>
                 <td>{{item.후보등록시작일시.format('YYYY년M월D일 H:M')}}~{{item.후보등록마감일시.format('YYYY년M월D일 H:M')}}</td>
                 <td>{{item.투표개시일시.format('YYYY년M월D일 H:M')}}~{{item.투표마감일시.format('YYYY년M월D일 H:M')}}</td>
-                <td>{{item.투표수}}({{item.투표율}})</td>
-                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율>=40">마감(당선)</td>
-                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율<40">마감(무효)</td>
+                <td>{{item.투표수}}({{item.투표율*100}})</td>
+                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율>=0.4">마감(당선)</td>
+                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율<0.4">마감(무효)</td>
                 <td v-if="now.isAfter(item.투표개시일시)&&now.isBefore(item.투표마감일시)">
                   투표중
                 </td>

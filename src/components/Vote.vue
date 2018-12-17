@@ -44,11 +44,21 @@ export default {
     return {
       msg: '후보등록',
       list: [],
-      voteid: ''
+      voteid: '',
+      id: ''
+    }
+  },
+  computed: {
+    isLogged () {
+        return this.$store.getters.isLogged
+    },
+    getId() {
+      return this.$store.getters.getId
     }
   },
   mounted: function() {
     this.voteid=this.$route.params.voteid
+    this.id=this.getId
     console.log("mounted")
     this.getData()
   },
@@ -59,7 +69,8 @@ export default {
       var url2 = this.$config.targetURL+'/vote';
       var json = {
         voteid: this.voteid,
-        candid: candId
+        candid: candId,
+        stuid: this.id
       }
       this.$http.put(url2,JSON.stringify(json))
       .then(result=>{

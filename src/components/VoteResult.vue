@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     getData: function() {
-      var url1 = this.$config.targetURL+'/vote/candInfo/result/'+this.voteid;
+      var url1 = this.$config.targetURL+'/vote/result/'+this.voteid;
       this.$http.get(url1)
       .then(result=>{
         console.log(result)
