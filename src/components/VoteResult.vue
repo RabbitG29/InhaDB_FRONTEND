@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <!-->TODO : 로그인되지 않았거나 이미 투표한 경우 페이지 들어오지 못하도록<!-->
-    <h1>{{this.voteid}}회 선거 투표하기</h1>
+    <h1>{{this.voteid}}회 선거 결과</h1>
+    <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <div id="board">
       <div class="board-box">
       <div class="row form-group">
@@ -18,16 +18,18 @@
                 <th class="text-center">후보 기호</th>
                 <th class="text-center">정후보 이름</th>
                 <th class="text-center">부후보 이름</th>
-                <th class="text-center">투표하기</th>
+                <th class="text-center">득표수(득표율)</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(item, index) in list" :key="index">
                 <td scope="col">{{item.선거회차}}회 선거</td>
-                <td>{{item.기호}}번 후보</td>
+                <td>
+                  <router-link :to="{ name: 'CandInfo', params: {vote_num: voteid, candi_num: item.기호 } }">{{item.기호}}번 후보</router-link>
+                </td>
                 <td>{{item.정후보이름}}</td>
                 <td>{{item.부후보이름}}</td>
-                <button v-on:click="vote(item.기호)" align="center">투표</button>
+                <td>{{item.득표수}}({{item.득표율}})</td>
               </tr>
             </tbody>
           </table>
@@ -39,43 +41,25 @@
 
 <script>
 export default {
-  name: 'Vote',
+  name: 'VoteResult',
   data() {
     return {
-      msg: '후보등록',
+      msg: '선거결과',
       list: [],
+      list2: [],
       voteid: ''
     }
   },
-  mounted: function() {
-    this.voteid=this.$route.params.voteid
-    console.log("mounted")
+  mounted: function(){
+    this.msg = ''
+    this.voteid = this.$route.params.voteid
+    console.log('현재 선거 회차 : '+this.voteid)
     this.getData()
   },
   methods: {
-    vote: function(candId) {
-      alert("투표되었습니다")
-      //TODO : 투표했을 경우 선거 정보의 투표수 1 증가, 득표 정보의 득표수 1 증가, 학생참여투표의 투표여부 true
-      var url2 = this.$config.targetURL+'/vote';
-      var json = {
-        voteid: this.voteid,
-        candid: candId
-      }
-      this.$http.put(url2,JSON.stringify(json))
-      .then(result=>{
-        console.log(result)
-        if(result.data.status!="success") {
-          alert("투표가 실패하였습니다. 재시도하여주세요")
-        }
-      })
-      .catch(err=>{
-        console.log("error")
-      })
-      this.$router.push("/") // 홈으로
-    },
     getData: function() {
-      var url = this.$config.targetURL+'/vote/candInfo/'+this.voteid;
-      this.$http.get(url)
+      var url1 = this.$config.targetURL+'/vote/candInfo/result/'+this.voteid;
+      this.$http.get(url1)
       .then(result=>{
         console.log(result)
         this.list = JSON.parse(result.data.result)
@@ -84,6 +68,9 @@ export default {
       .catch(err=>{
         console.log("error")
       })
+    },
+    goBack: function(){
+      this.$router.go(-1)
     }
   }
 }

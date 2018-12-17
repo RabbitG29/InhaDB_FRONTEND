@@ -26,9 +26,11 @@
                   <router-link :to="{ name: 'VoteInfo', params: { voteid: item.선거회차 } }">{{item.선거회차}}회 선거</router-link>
                 </td>
                 <td>{{item.투표수}}</td>
-                <td>{{item.투표율}}</td>
-                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율>=40">마감(당선)</td>
-                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율<40">마감(무효)</td>
+                <td>{{item.투표율*100}}%</td>
+                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율>=0.4">
+                  <router-link :to="{ name: 'VoteResult', params: {voteid: item.선거회차} }">투표마감(당선)결과</router-link>
+                </td>
+                <td v-if="now.isAfter(item.투표마감일시)&&item.투표율<0.4">마감(무효)</td>
                 <td v-if="now.isAfter(item.투표개시일시)&&now.isBefore(item.투표마감일시)">
                   <router-link :to="{ name: 'Vote', params: {voteid: item.선거회차} }">투표하기</router-link>
                 </td>

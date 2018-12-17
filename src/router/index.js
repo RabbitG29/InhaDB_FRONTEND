@@ -11,7 +11,8 @@ import CandInfo from '@/components/CandInfo'
 import WinnerInfo from '@/components/WinnerInfo'
 import PostViewer from '@/components/PostViewer'
 import PostUploader from '@/components/PostUploader'
-import RegisterCand from '@/components/REgisterCand'
+import RegisterCand from '@/components/RegisterCand'
+import VoteResult from '@/components/VoteResult'
 
 Vue.use(Router)
 
@@ -76,6 +77,11 @@ export default new Router({
       path: 'registercand',
       name: 'RegitserCand',
       component: RegisterCand
+    },
+    {
+      path: 'voteresult',
+      name: 'VoteResult',
+      component: VoteResult
     }
   ]
 })

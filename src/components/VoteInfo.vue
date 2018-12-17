@@ -103,7 +103,7 @@ export default { //vote_num이랑 candi_num 넘겨줘야 함
   },
   methods: {
     getData: function() {
-      var url = this.$config.targetURL+'/vote/'+this.voteid;
+      var url = this.$config.targetURL+'/vote/info/'+this.voteid;
       this.$http.get(url)
       .then(result=>{
         console.log(result)

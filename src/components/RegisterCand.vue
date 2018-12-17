@@ -29,20 +29,63 @@ export default {
     return {
       msg: '후보등록',
       list: [],
-      voteid: ''
+      voteid: '',
+      Jid: '',
+      Jpassword: '',
+      Bid: '',
+      Bpassword: ''
     }
   },
   mounted: function() {
     this.voteid=this.$route.params.voteid
     console.log("mounted")
-    this.getData()
   },
   methods: {
-    getData: function() {
-      //TODO : 학생 비밀번호 확인하기
-    },
     submit: function(){
+      //정후보 확인
+      this.$http.get(this.$config.targetURL+`/login?id=${this.Jid}&password=${this.Jpassword}`)
+      .then((result)=>{
+          if(result.data.status == 'success'){ // 성공
+              console.log('success')
+              console.log(result.data)
+          }
+          else {
+            console.log('error')
+            alert("정후보 정보가 올바르지 않습니다.")
+          }
+        })
+      .catch((error)=>{
+        console.log('서버에러')
+      })
+      //부후보 확인
+      this.$http.get(this.$config.targetURL+`/login?id=${this.Bid}&password=${this.Bpassword}`)
+      .then((result)=>{
+          if(result.data.status == 'success'){ // 성공
+              console.log('success')
+              console.log(result.data)
+          }
+          else {
+            console.log('error')
+            alert("부후보 정보가 올바르지 않습니다.")
+          }
+        })
+      .catch((error)=>{
+        console.log('서버에러')
+      })
       //TODO : 제출하면 후보에 등록
+      var json = {
+        voteid: this.voteid,
+        jid: this.Jid,
+        bid: this.Bid
+      }
+      this.$http.post(this.$config.targetURL+'/vote/candInfo/register',json)
+      .then((reslt)=>{
+        this.$notice({
+          type: 'success',
+          text: '후보 등록이 완료되었습니다.'
+        })
+        this.$router.go(-1)
+      })
     }
   }
 }
