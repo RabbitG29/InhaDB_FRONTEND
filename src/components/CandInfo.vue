@@ -84,6 +84,9 @@ export default {
       .catch(error=> {
         console.log('서버에러')
       })
+    },
+    goBack: function(){
+      this.$router.go(-1)
     }
   }
 }
