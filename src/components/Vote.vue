@@ -44,6 +44,7 @@ export default {
     return {
       msg: '후보등록',
       list: [],
+      isvoted: '',
       voteid: '',
       id: ''
     }
@@ -59,6 +60,7 @@ export default {
   mounted: function() {
     this.voteid=this.$route.params.voteid
     this.id=this.getId
+    this.isVoted()
     console.log("mounted")
     this.getData()
   },
@@ -91,6 +93,23 @@ export default {
         console.log(result)
         this.list = JSON.parse(result.data.result)
         console.log(this.list)
+      })
+      .catch(err=>{
+        console.log("error")
+      })
+    },
+    isVoted: function() {
+      var url3 = this.$config.targetURL+'/vote/verify/'+this.voteid+'/'+this.id;
+      console.log(this.voteid)
+      console.log(this.id)
+      this.$http.get(url3)
+      .then(result=>{
+        console.log(result)
+        this.isvoted=result.data.result
+        if(this.isvoted==1) {
+          alert("이미 투표하였습니다")
+          this.$router.push("/")
+        }
       })
       .catch(err=>{
         console.log("error")
