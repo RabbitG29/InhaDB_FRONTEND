@@ -1,14 +1,11 @@
 <template>
   <div class="hello">
     <h1>HOME</h1>
-    <router-link to="vote"> 투표하기 </router-link>
     <br>
-    <router-link to="voteInfo"> 투표정보 </router-link>
+    <h2>INHA Univ. Database Capstone Design</h2>
+    <h2>Final Project 2018 Fall</h2>
     <br>
-    <router-link to="candInfo"> 후보정보 </router-link>
-    <br>
-    <router-link to="winnerInfo"> 당선자정보 </router-link>
-
+    <img src="./images/db.jpg">
   </div>
 </template>
 
