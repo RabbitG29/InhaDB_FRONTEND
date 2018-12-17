@@ -2,8 +2,14 @@
   <div>
   <div class="container">
     <h1>후보자정보</h1>
+    <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <div>
       <div id="card-candidate">
+        <div class="row form-group">
+          <div class="col-sm-10"></div>
+          <div class="col-sm-2" >
+          </div>
+        </div>
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">기호 {{list[0].기호}}번</h5>
