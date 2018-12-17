@@ -13,6 +13,8 @@
                     <span v-else>
                         <a href="" @click="logOut"> 로그아웃 </a>
                         <router-link to="MyPage"> 마이페이지 </router-link>
+                        <router-link v-if="isEc != 0" to="ECPage"> 선관위페이지 </router-link>
+                        <a v-if="isCand != 0"> 후보자 </a>
                     </span>
                 </div>
             </div>
@@ -47,6 +49,12 @@ export default {
         },
         getToken() {
             return this.$store.getters.getToken
+        },
+        isCand() {
+          return this.$store.getters.getCand
+        },
+        isEc() {
+          return this.$store.getters.getEc
         }
     },
     watch: {
@@ -61,7 +69,9 @@ export default {
     },
     data(){
         return {
-            sidebar: false
+            sidebar: false,
+             cand: '',
+             ec: ''
         }
     }
 }

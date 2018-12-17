@@ -43,10 +43,14 @@ export default {
   },
   methods: {
       logIn(data){
-          console.log(data)
+        console.log("commit")
+        console.log(data.ec)
+          console.log(data.cand)
           this.$store.commit('logIn', {
               id: this.id,
-              password: this.password
+              password: this.password,
+              cand: data.cand,
+              ec: data.ec
           })
       },
       submit: function(){

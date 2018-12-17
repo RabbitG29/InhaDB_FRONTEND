@@ -52,6 +52,7 @@ export default {
           else {
             console.log('error')
             alert("정후보 정보가 올바르지 않습니다.")
+            return;
           }
         })
       .catch((error)=>{
@@ -67,6 +68,7 @@ export default {
           else {
             console.log('error')
             alert("부후보 정보가 올바르지 않습니다.")
+            return;
           }
         })
       .catch((error)=>{

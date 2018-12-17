@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate"
-Vue.use(Vuex) 
+Vue.use(Vuex)
 /* eslint-disable */
 export const store = new Vuex.Store({
     state:{
@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
         token: '',
         name: '',
         phone: '',
-        authLevel: ''
+        cand: '',
+        ec: ''
     },
     plugins: [createPersistedState()],
     getters:{
@@ -20,8 +21,8 @@ export const store = new Vuex.Store({
         getId: function(state){
             return state.id
         },
-        getToken: function(state){
-            return state.token
+        getEc: function(state){
+            return state.ec
         },
         getName: function(state){
             return state.name
@@ -29,14 +30,16 @@ export const store = new Vuex.Store({
         getPhone: function(state){
             return state.phone
         },
-        getAuthLevel: function(state){
-            return state.authLevel
+        getCand: function(state){
+            return state.cand
         }
     },
     mutations: {
         logIn: function(state, payload){
             state.isLogged = true
             state.id = payload.id
+            state.ec = payload.ec
+            state.cand = payload.cand
         },
         logOut: function(state, payload){
             state.isLogged = false
