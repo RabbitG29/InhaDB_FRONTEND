@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <h1>Winner</h1>
-    <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
+    <h1>역대 당선자 목록</h1>
+    <br>
+    <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <br>
     <div type="text/x-template" v-for="(item, index) in list" :key="index" id="blog-card">
     <router-link :to="{ name: 'WinnerInfo', params: {winid: item.선거회차 } }"> {{item.선거회차}}회 당선인</router-link>
@@ -56,6 +57,9 @@ export default {
       .catch(error=> {
         console.log('서버에러')
       })
+    },
+    goBack: function(){
+      this.$router.go(-1)
     }
    }
 }

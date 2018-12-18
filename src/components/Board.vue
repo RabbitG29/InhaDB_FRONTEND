@@ -6,7 +6,7 @@
       <div v-show="isLogged" class="row form-group">
         <div class="col-sm-10"></div>
         <div class="col-sm-2" >
-          <button type="button" class="btn btn-secondary"
+          <button type="button" class="btn btn-secondary" v-if="(this.boardId!=1)||((this.boardId==1)&&(isEc != 0))"
         @click="createLog()" >글 등록</button>
         </div>
       </div>
@@ -47,6 +47,11 @@
 <script>
 export default {
     name : "Board",
+    computed: {
+      isEc() {
+        return this.$store.getters.getEc
+      }
+    },
     data(){
         return {
             msg: '게시판',

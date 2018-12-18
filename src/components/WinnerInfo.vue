@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <h1>Winner Info</h1>
-    <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
+    <h1>{{this.winid}}회 당선자</h1>
+    <br>
+    <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <br>
     <h3>정후보</h3>
     <table class="table table-striped">
@@ -13,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item, index) in seclist" @click="readBoard(item)" :key="index" style="cursor: pointer">
+      <tr v-for="(item, index) in seclist" @click="readBoard(item)" :key="index">
         <td>{{item.이력번호}}</td>
         <td>{{item.연도}}</td>
         <td>{{item.이력내용}}</td>
@@ -30,7 +31,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item, index) in seclist2" @click="readBoard(item)" :key="index" style="cursor: pointer">
+      <tr v-for="(item, index) in seclist2" @click="readBoard(item)" :key="index">
         <td>{{item.이력번호}}</td>
         <td>{{item.연도}}</td>
         <td>{{item.이력내용}}</td>
@@ -39,7 +40,7 @@
     </tbody>
     </table>
     <br>
-    <h2>실시 공약들...</h2>
+    <h2>실시 공약 목록</h2>
     <table class="table table-striped">
       <thead>
          <tr class="text-center">
@@ -49,15 +50,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in list" @click="readBoard(item)" :key="index" style="cursor: pointer">
+        <tr v-for="(item, index) in list" @click="readBoard(item)" :key="index">
           <td>{{item.공약번호}}</td>
           <td>{{item.공약내용}}</td>
-          <td>{{item.이행여부}}</td>
+          <td>
+            <a v-if="item.이행여부==1">완료</a>
+            <a v-if="item.이행여부==0">미완료</a>
+          </td>
         </tr>
       </tbody>
     </table>
     <br>
-    <h2>실시 사업들...</h2>
+    <h2>실시 사업 목록</h2>
     <table class="table table-striped">
       <thead>
          <tr class="text-center">
@@ -68,7 +72,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in thlist" @click="readBoard(item)" :key="index" style="cursor: pointer">
+        <tr v-for="(item, index) in thlist" @click="readBoard(item)" :key="index">
           <td>{{item.사업번호}}</td>
           <td>{{item.사업이름}}</td>
           <td>{{item.사업내용}}</td>
@@ -145,6 +149,9 @@ export default {
       .catch(error=> {
         console.log('서버에러')
       })
+    },
+    goBack: function(){
+      this.$router.go(-1)
     }
   },
     mounted: function(){

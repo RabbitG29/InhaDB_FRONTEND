@@ -13,6 +13,7 @@ import PostViewer from '@/components/PostViewer'
 import PostUploader from '@/components/PostUploader'
 import RegisterCand from '@/components/RegisterCand'
 import VoteResult from '@/components/VoteResult'
+import ECPage from '@/components/ECpage'
 
 Vue.use(Router)
 
@@ -74,14 +75,19 @@ export default new Router({
       component: PostUploader
     },
     {
-      path: 'registercand',
+      path: '/registercand',
       name: 'RegitserCand',
       component: RegisterCand
     },
     {
-      path: 'voteresult',
+      path: '/voteresult',
       name: 'VoteResult',
       component: VoteResult
+    },
+    {
+      path: '/ecpage',
+      name: 'ECPage',
+      component: ECPage
     }
   ]
 })

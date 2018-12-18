@@ -33,7 +33,9 @@ export default {
       Jid: '',
       Jpassword: '',
       Bid: '',
-      Bpassword: ''
+      Bpassword: '',
+      ok1: '',
+      ok2: ''
     }
   },
   mounted: function() {
@@ -48,11 +50,12 @@ export default {
           if(result.data.status == 'success'){ // 성공
               console.log('success')
               console.log(result.data)
+              this.ok1=1;
           }
           else {
             console.log('error')
             alert("정후보 정보가 올바르지 않습니다.")
-            return;
+            this.$router.go(0)
           }
         })
       .catch((error)=>{
@@ -64,11 +67,12 @@ export default {
           if(result.data.status == 'success'){ // 성공
               console.log('success')
               console.log(result.data)
+              this.ok2=1;
           }
           else {
             console.log('error')
             alert("부후보 정보가 올바르지 않습니다.")
-            return;
+            this.$router.go(0)
           }
         })
       .catch((error)=>{

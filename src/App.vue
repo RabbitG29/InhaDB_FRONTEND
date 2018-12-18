@@ -13,8 +13,8 @@
                     <span v-else>
                         <a href="" @click="logOut"> 로그아웃 </a>
                         <router-link to="MyPage"> 마이페이지 </router-link>
-                        <router-link v-if="isEc != 0" to="ECPage"> 선관위페이지 </router-link>
-                        <a v-if="isCand != 0"> 후보자 </a>
+                        <router-link v-if="isEc != 0" :to="{ name: 'ECPage', params: { voteid: isEc } }"> {{isEc}}회 선관위페이지 </router-link>
+                        <a v-if="isCand != 0"> {{isCand}}회 후보자 </a>
                     </span>
                 </div>
             </div>
