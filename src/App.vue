@@ -47,8 +47,8 @@ export default {
         getId() {
             return this.$store.getters.getId
         },
-        getToken() {
-            return this.$store.getters.getToken
+        getName() {
+            return this.$store.getters.getName
         },
         isCand() {
           return this.$store.getters.getCand

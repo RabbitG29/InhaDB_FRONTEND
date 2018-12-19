@@ -11,7 +11,7 @@
             <div v-show="isLogged && getId == writerID">
               <button type="button" class="btn btn-light btn-sm" style="cursor: pointer" @click.prevent="editLog">수정</button>
             </div>
-            <div v-show="(isLogged && getId == writerID)||getAuthLevel >= 5">
+            <div v-show="isLogged && getId == writerID">
               <button type="button" class="btn btn-light btn-sm" style="cursor: pointer" @click.prevent="deleteLog">삭제</button>
             </div>
           </div>
@@ -90,6 +90,7 @@ export default {
       comment: '',
       path: '',
       id: '',
+      boardid: '',
       filename: '',
       list: []
     }
@@ -97,9 +98,11 @@ export default {
   created: function(){
     this.$Progress.start()
     this.id = this.$route.query.id
+    this.boardid = this.$route.query.boardid
     console.log('마운티드!')
         console.log(this.id)
-    this.$http.get(this.$config.targetURL+'/resources/post/content/'+this.id)
+        console.log(this.bardid)
+    this.$http.get(this.$config.targetURL+'/resources/post/content/'+this.boardid+'/'+this.id)
     .then(r=>{
     console.log('마운티드!2')
       if(r.data.status == 'success'){
@@ -138,7 +141,7 @@ export default {
       this.$router.go(-1)
     },
     deleteLog: function(){
-      this.$http.delete(this.$config.targetURL+'/resources/post/'+this.id)
+      this.$http.delete(this.$config.targetURL+'/resources/post/'+this.boardid+'/'+this.id)
       .then(result=>{
         if(result.data.status == 'success'){
           console.log('삭제성공')
@@ -159,13 +162,14 @@ export default {
         name:'PostUploader',
         query: {
           mode: 'edit',
-          postId: this.id
+          postId: this.id,
+          boardId: this.boardid
         }
       })
     },
     getComment: function(){
       console.log("comment")
-      this.$http.get(this.$config.targetURL+'/resources/comment/'+this.id)
+      this.$http.get(this.$config.targetURL+'/resources/comment/'+this.boardid+'/'+this.id)
       .then(result=>{
           console.log(result)
           console.log(result.data.status)
@@ -183,14 +187,16 @@ export default {
           console.log('서버에러')
       })
     },
-    commentEroll : function(){
+    commentEroll : function(){ // 댓글 등록
      var url = this.$config.targetURL+'/resources/comment';
 
      var json = {
        postId: this.id,
        content: this.comment,
-       writerID: this.getId
+       writerID: this.getId,
+       boardId: this.boardid
      }
+     console.log(json)
      this.$http.post(url, json)
      .then(result=>{
        if(result.data.status == 'success'){
@@ -207,7 +213,7 @@ export default {
        })
     },
     deleteComment : function(commentId){
-      this.$http.delete(this.$config.targetURL+'/resources/comment/'+commentId)
+      this.$http.delete(this.$config.targetURL+'/resources/comment/'+this.boardid+'/'+this.id+'/'+commentId)
       .then(result=>{
         if(result.data.status == 'success'){
           console.log('삭제성공')
@@ -222,7 +228,7 @@ export default {
         console.log('서버에러')
       })
     },
-    editComment : function(item){
+    editComment : function(item){ //댓글 수정
       var commentId = item.댓글번호
       var comment = item.댓글내용
 
@@ -230,7 +236,9 @@ export default {
       var url = this.$config.targetURL+'/resources/comment';
       var json = {
         commentId: commentId,
-        content: comment
+        content: comment,
+        boardId: this.boardid,
+        postId: this.id
       }
       this.$http.put(url, json)
 

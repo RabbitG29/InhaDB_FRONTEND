@@ -14,6 +14,7 @@ import PostUploader from '@/components/PostUploader'
 import RegisterCand from '@/components/RegisterCand'
 import VoteResult from '@/components/VoteResult'
 import ECPage from '@/components/ECpage'
+import MyPage from '@/components/MyPage'
 
 Vue.use(Router)
 
@@ -88,6 +89,11 @@ export default new Router({
       path: '/ecpage',
       name: 'ECPage',
       component: ECPage
+    },
+    {
+      path: '/mypage',
+      name: 'MyPage',
+      component: MyPage
     }
   ]
 })

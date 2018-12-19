@@ -6,7 +6,7 @@
     <br>
     <div type="text/x-template" v-for="(item, index) in list" :key="index" id="blog-card">
     <router-link :to="{ name: 'WinnerInfo', params: {winid: item.선거회차 } }"> {{item.선거회차}}회 당선인</router-link>
-      <a class="card-link" href="#">
+      <a class="card-link">
         <article class="blog-card">
           <img class="post-image" :src="image" />
           <div class="article-details">

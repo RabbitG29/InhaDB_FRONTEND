@@ -39,7 +39,6 @@
           </div>
         </div>
       </div>
-      <router-link :to="{ name: 'HelloWorld', params: {} }">홈으로</router-link>
   </div>
 </div>
 </div>

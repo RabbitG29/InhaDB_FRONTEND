@@ -32,11 +32,13 @@
                 </td>
                 <td v-if="now.isAfter(item.투표마감일시)&&item.투표율<0.4">마감(무효)</td>
                 <td v-if="now.isAfter(item.투표개시일시)&&now.isBefore(item.투표마감일시)">
-                  <router-link :to="{ name: 'Vote', params: {voteid: item.선거회차} }">투표하기</router-link>
+                  <router-link v-if="isLogged" :to="{ name: 'Vote', params: {voteid: item.선거회차} }">투표중(투표하기)</router-link>
+                  <a v-if="!isLogged">투표중</a>
                 </td>
                 <td v-if="now.isAfter(item.후보등록마감일시)&&now.isBefore(item.투표개시일시)">후보등록마감</td>
                 <td v-if="now.isAfter(item.후보등록시작일시)&&now.isBefore(item.후보등록마감일시)">
-                  <router-link :to="{ name: 'RegitserCand', params: {voteid: item.선거회차} }">후보등록하기</router-link>
+                  <router-link v-if="isLogged" :to="{ name: 'RegitserCand', params: {voteid: item.선거회차} }">후보등록중(후보등록하기)</router-link>
+                  <a v-if="!isLogged">후보등록중</a>
                 </td>
                 <td v-if="now.isBefore(item.후보등록시작일시)">후보등록 시작 예정</td>
               </tr>

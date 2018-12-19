@@ -80,7 +80,8 @@ export default {
           this.$router.push({
             name: 'PostViewer',
             query: {
-              id: item.게시글번호
+              id: item.게시글번호,
+              boardid: this.boardId
             }
           })
         },

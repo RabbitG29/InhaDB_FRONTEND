@@ -29,8 +29,8 @@ export default {
             counter: 1,
             title: '',
             postId: '',
-            cursorPos: '',
             boardId: '',
+            cursorPos: '',
             content: '',
             mode: '',
             writerID:'',
@@ -50,15 +50,18 @@ export default {
         else if(this.$route.query.mode == 'edit'){
           this.mode = 'edit'
           this.postId = this.$route.query.postId
-          this.$http.get(this.$config.targetURL+'/resources/post/content/'+this.postId)
+          this.boardId = this.$route.query.boardId
+          console.log(this.boardId)
+          console.log("수정할때")
+          this.$http.get(this.$config.targetURL+'/resources/post/content/'+this.boardId+'/'+this.postId)
           .then(r=>{
             if(r.data.status == 'success'){
               var result = JSON.parse(r.data.result)
-              this.title = result.title
-              this.writer = result.writer
-              this.content = result.content
-              this.id = result.id
-              this.writerID = result.writerID
+              console.log(result[0])
+              this.title = result[0].게시글제목
+              this.writer = result[0].이름
+              this.content = result[0].게시글내용
+              this.writerID = result[0].학번
             }
           })
           .catch(e=>{
@@ -107,18 +110,20 @@ export default {
                 })
               })
           }
-          else if(this.mode == 'edit'){
-            var url = this.$config.targetURL+'/resources/mlog/';
-
+          else if(this.mode == 'edit'){ // 게시글 수정
+            var url = this.$config.targetURL+'/resources/post/';
+            console.log("edit")
             var json = {
               content: this.content,
               title: this.title,
-              id: this.postId
+              postid: this.postId,
+              boardid: this.boardId
             }
-            var formData = new FormData()
-            formData.append('information', JSON.stringify(json))
+            console.log(json)
+            //var formData = new FormData()
+            //formData.append('information', JSON.stringify(json))
 
-            this.$http.put(url, formData)
+            this.$http.put(url, json)
             .then(result=>{
               console.log('success!')
               this.$notice({
