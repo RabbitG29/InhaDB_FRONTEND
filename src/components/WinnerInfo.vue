@@ -4,7 +4,7 @@
     <br>
     <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <br>
-    <h3>정후보</h3>
+    <h3>정후보{{this.seclist[0].이름}}</h3>
     <table class="table table-striped">
     <thead>
        <tr class="text-center">

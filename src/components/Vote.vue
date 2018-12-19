@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-->TODO : 로그인되지 않았거나 이미 투표한 경우 페이지 들어오지 못하도록<!-->
     <h1>{{this.voteid}}회 선거 투표하기</h1>
     <div id="board">
       <div class="board-box">

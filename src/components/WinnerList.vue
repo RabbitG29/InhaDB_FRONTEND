@@ -4,8 +4,10 @@
     <br>
     <a href="#" class="btn btn-secondary" style="float:right cursor: pointer" @click="goBack">뒤로가기</a>
     <br>
-    <div type="text/x-template" v-for="(item, index) in list" :key="index" id="blog-card">
-    <router-link :to="{ name: 'WinnerInfo', params: {winid: item.선거회차 } }"> {{item.선거회차}}회 당선인</router-link>
+    <br>
+    <div class="card" v-for="(item, index) in list" :key="index" id="blog-card">
+      <br>
+    <h2><router-link :to="{ name: 'WinnerInfo', params: {winid: item.선거회차 } }"> {{item.선거회차}}회 당선인</router-link></h2>
       <a class="card-link">
         <article class="blog-card">
           <img class="post-image" :src="image" />

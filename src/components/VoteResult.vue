@@ -14,7 +14,7 @@
           <table class="table table-striped">
             <thead>
                <tr class="text-center">
-                <th class="text-center" scope="col">선거회차</th>
+                <th class="text-center" scope="col">득표 순위</th>
                 <th class="text-center">후보 기호</th>
                 <th class="text-center">정후보 이름</th>
                 <th class="text-center">부후보 이름</th>
@@ -23,13 +23,13 @@
             </thead>
             <tbody>
               <tr v-for="(item, index) in list" :key="index">
-                <td scope="col">{{item.선거회차}}회 선거</td>
+                <td scope="col">{{item.득표순위}}위</td>
                 <td>
                   <router-link :to="{ name: 'CandInfo', params: {vote_num: voteid, candi_num: item.기호 } }">{{item.기호}}번 후보</router-link>
                 </td>
                 <td>{{item.정후보이름}}</td>
                 <td>{{item.부후보이름}}</td>
-                <td>{{item.득표수}}({{item.득표율}})</td>
+                <td>{{item.득표수}}({{item.득표율*100}}%)</td>
               </tr>
             </tbody>
           </table>

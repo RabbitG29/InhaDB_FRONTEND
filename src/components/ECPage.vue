@@ -2,6 +2,8 @@
   <div>
     <div class="container">
       <h4> {{this.voteid}}회 후보자 정보</h4>
+      <a href="#" class="btn btn-primary" style="float:right cursor: pointer" @click="updateRank">득표 순위 갱신</a>
+      <br>
       <br>
       <h5> 승인된 후보자 목록 </h5>
       <div class="board-box">
@@ -162,6 +164,27 @@ export default {
           this.$notice(
             {type: 'error',
             text: "서버에러"}
+          )
+        }
+      })
+    },
+    updateRank: function() {
+      var url4 = this.$config.targetURL+'/vote/candInfo/rank';
+      var json = {
+        voteid: this.voteid
+      }
+      this.$http.put(url4,json)
+      .then(r=> {
+        if(r.data.status=="success") {
+          this.$notice(
+            {type: 'success',
+            text: '후보 순위가 업데이트되었습니다.'}
+          )
+        }
+        else {
+          this.$notice(
+            {type: 'error',
+            text: "에러"}
           )
         }
       })
